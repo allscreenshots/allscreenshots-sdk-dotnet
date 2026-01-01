@@ -1,0 +1,25 @@
+@page
+@model AllScreenshotsDemo.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Error</h1>
+        <p>An error occurred while processing your request.</p>
+        @if (Model.ShowRequestId)
+        {
+            <p>Request ID: @Model.RequestId</p>
+        }
+    </div>
+</body>
+</html>
