@@ -1,0 +1,93 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  test:
+    name: Test before release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore SDK dependencies
+        working-directory: sdk
+        run: dotnet restore
+
+      - name: Build SDK
+        working-directory: sdk
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run unit tests
+        working-directory: sdk
+        run: dotnet test tests/AllScreenshots.Sdk.Tests.Unit --no-build --configuration Release --verbosity normal
+
+      - name: Run integration tests
+        working-directory: sdk
+        env:
+          ALLSCREENSHOTS_API_KEY: ${{ secrets.ALLSCREENSHOTS_API_KEY }}
+        run: dotnet test tests/AllScreenshots.Sdk.Tests.Integration --no-build --configuration Release --verbosity normal
+
+  publish:
+    name: Publish to NuGet
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Restore SDK dependencies
+        working-directory: sdk
+        run: dotnet restore
+
+      - name: Build SDK
+        working-directory: sdk
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Pack NuGet package
+        working-directory: sdk
+        run: dotnet pack src/AllScreenshots.Sdk --no-build --configuration Release -p:PackageVersion=${{ steps.version.outputs.VERSION }} --output ./artifacts
+
+      - name: Push to NuGet
+        working-directory: sdk
+        run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ steps.version.outputs.VERSION }}
+          generate_release_notes: true
+          body: |
+            ## Installation
+
+            ```bash
+            dotnet add package AllScreenshots.Sdk --version ${{ steps.version.outputs.VERSION }}
+            ```
+
+            Or via Package Manager:
+
+            ```powershell
+            Install-Package AllScreenshots.Sdk -Version ${{ steps.version.outputs.VERSION }}
+            ```
+          files: sdk/artifacts/*.nupkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
