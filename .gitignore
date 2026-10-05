@@ -1,54 +1,16 @@
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
-
-# Visual Studio files
-.vs/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# NuGet
-*.nupkg
-*.snupkg
-**/[Pp]ackages/*
-!**/[Pp]ackages/build/
-
-# Test results
-[Tt]est[Rr]esult*/
-TestResults/
-*.trx
-test-report.html
-
-# Publish output
-publish/
-artifacts/
-
-# Coverage
-coverage*/
-*.coverage
-*.coveragexml
-
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.egg-info/
+build/
+.build/
+.swiftpm/
+target/
+bin/
+obj/
+vendor/
+.bundle/
+test-results/
+capture.png
+sample-app/worker

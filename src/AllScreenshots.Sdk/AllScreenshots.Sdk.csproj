@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>AllScreenshots.Sdk</AssemblyName>
+    <PackageId>AllScreenshots.Sdk</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>Allscreenshots</Authors>
+    <Company>Allscreenshots</Company>
+    <AssemblyTitle>Allscreenshots SDK</AssemblyTitle>
+    <Description>Allscreenshots website capture API SDK</Description>
+    <Copyright>Allscreenshots</Copyright><PackageReadmeFile>README.md</PackageReadmeFile>
+    <RootNamespace>AllScreenshots.Sdk</RootNamespace>
+    <Version>2.0.0</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\AllScreenshots.Sdk.xml</DocumentationFile>
+    <RepositoryUrl>https://github.com/allscreenshots/allscreenshots-sdk-dotnet.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Nullable>annotations</Nullable>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+<ItemGroup><None Include="../../sdk-provenance.json" Pack="true" PackagePath="" /><None Include="../../openapi.json" Pack="true" PackagePath="" /><None Include="../../README.md" Pack="true" PackagePath="" /></ItemGroup>
+</Project>

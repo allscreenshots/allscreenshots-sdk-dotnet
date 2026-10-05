@@ -1,68 +1,7 @@
-# Allscreenshots Demo Application
+# Dotnet SDK demo
 
-A sample Blazor Server application demonstrating the Allscreenshots .NET SDK.
+This local browser app calls the generated SDK at the repository root. It supports sync capture, async submit/poll/download, quota, image preview, and PNG download.
 
-## Prerequisites
+Build the SDK and demo using `python3 tools/verify.py --build`. Set `ALLSCREENSHOTS_API_KEY` in your shell, optionally set `ALLSCREENSHOTS_BASE_URL`, then run `python3 sample-app/serve.py` and open http://127.0.0.1:7070. The key is never sent to the demo browser.
 
-- .NET 8.0 SDK or later
-- An Allscreenshots API key
-
-## Setup
-
-1. Set your API key as an environment variable:
-
-   ```bash
-   export ALLSCREENSHOTS_API_KEY=your-api-key
-   ```
-
-2. Navigate to this directory:
-
-   ```bash
-   cd sample-app
-   ```
-
-3. Run the application:
-
-   ```bash
-   dotnet run
-   ```
-
-4. Open your browser to `https://localhost:5001` (or the URL shown in the console).
-
-## Features
-
-- **URL input**: Enter any URL to capture
-- **Device selector**: Choose from Desktop HD, iPhone 14, or iPad presets
-- **Full page toggle**: Capture the entire scrollable page
-- **Screenshot display**: View the captured screenshot directly in the browser
-- **Error handling**: User-friendly error messages for common issues
-
-## Usage
-
-1. Enter a URL in the text field (e.g., `https://github.com`)
-2. Select a device preset from the dropdown
-3. Optionally check "Full page" for full-page captures
-4. Click "Take Screenshot"
-5. Wait for the screenshot to appear in the result section
-
-## Project structure
-
-```
-sample-app/
-├── Components/
-│   ├── App.razor         # Main application component
-│   └── _Imports.razor     # Razor imports
-├── Pages/
-│   ├── _Host.cshtml       # Host page
-│   └── Error.cshtml       # Error page
-├── wwwroot/
-│   └── css/
-│       └── app.css        # Application styles
-├── Program.cs             # Application entry point
-├── appsettings.json       # Configuration
-└── AllScreenshotsDemo.csproj
-```
-
-## License
-
-Apache License 2.0. See [LICENSE](LICENSE) for details.
+You can also run the worker with `quota`, `sync`, or `async`; see `sdk-build.json` for its command. Capture workers use responseType URL with a submission key, then download through the SDK. To recover a submission, reuse `ALLSCREENSHOTS_IDEMPOTENCY_KEY` with the same request.

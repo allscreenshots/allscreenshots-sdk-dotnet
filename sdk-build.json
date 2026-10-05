@@ -1,0 +1,15 @@
+{
+  "language": "dotnet",
+  "build": [
+    [
+      "dotnet",
+      "build",
+      "sample-app/SDKDemo.csproj",
+      "-p:RestoreLockedMode=true"
+    ]
+  ],
+  "run": [
+    "dotnet",
+    "sample-app/bin/Debug/net10.0/SDKDemo.dll"
+  ]
+}
