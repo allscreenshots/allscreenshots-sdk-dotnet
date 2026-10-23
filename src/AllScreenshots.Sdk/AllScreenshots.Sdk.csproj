@@ -9,13 +9,16 @@
     <Authors>Allscreenshots</Authors>
     <Company>Allscreenshots</Company>
     <AssemblyTitle>Allscreenshots SDK</AssemblyTitle>
-    <Description>Allscreenshots website capture API SDK</Description>
+    <Description>Official .NET SDK for the Allscreenshots screenshot API: capture websites, manage jobs, compose images, schedule captures, crawl sites, and read usage.</Description>
     <Copyright>Allscreenshots</Copyright><PackageReadmeFile>README.md</PackageReadmeFile>
     <RootNamespace>AllScreenshots.Sdk</RootNamespace>
     <Version>2.0.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\AllScreenshots.Sdk.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/allscreenshots/allscreenshots-sdk-dotnet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://allscreenshots.com</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>allscreenshots;screenshot;screenshot-api;website-screenshot;web-capture;sdk;api-client</PackageTags>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <Nullable>annotations</Nullable>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
